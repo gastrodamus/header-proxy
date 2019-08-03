@@ -1,10 +1,12 @@
 {
   "name": "gallery-proxy",
   "version": "1.0.0",
-  "description": "Proxy Server for Munch",
+  "description": "Proxy Server for Gastrodamus",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js",
+    "k6": "k6 run server/script.js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +19,12 @@
   },
   "homepage": "https://github.com/the-munch/gallery-proxy#readme",
   "dependencies": {
+    "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "http-proxy": "^1.17.0",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "newrelic": "^5.11.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
