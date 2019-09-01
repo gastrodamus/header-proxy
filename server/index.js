@@ -5,15 +5,18 @@ const app = express();
 const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const axios = require('axios');
+const httpProxy = require('http-proxy');
+const proxy = httpProxy.createProxyServer();
 
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use('/:id', express.static(path.join(__dirname, '/../client')));
 
-const gallery = 'http://localhost:3000';
-const reservation = 'http://localhost:3001';
-const popular = 'http://localhost:3002';
-const header = 'http://localhost:3003/api/header';
+// const gallery = 'http://localhost:3004';
+// const reservation = 'http://localhost:3001';
+// const popular = 'http://localhost:3002';
+// const header = 'http://localhost:3003';
+
+const header = 'http://54.241.156.181';
 
 // app.all('/gallery/:id', function(req, res) {
 //     console.log('redirecting to gallery');
@@ -30,10 +33,12 @@ const header = 'http://localhost:3003/api/header';
 //     proxy.web(req, res, { target: popular });
 // });
 
-app.get('/header/:id', function(req, res) {
-  console.log(header + '/' + req.params.id)
-  axios.get(header + '/' + req.params.id)
-    .then(({data}) => res.send(data))
+app.all('/header/:id', function(req, res) {
+    proxy.web(req, res, { target: header });
+});
+
+app.all('/api/header/:id', function(req, res) {
+    proxy.web(req, res, { target: header });
 });
 
 app.listen(PORT, ()=> console.log(`Server listening on port ${PORT}`))

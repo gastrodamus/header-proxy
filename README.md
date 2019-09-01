@@ -1,1 +1,1 @@
-# gallery-proxy
+# header-proxy

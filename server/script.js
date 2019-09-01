@@ -13,5 +13,5 @@ export let options = {
 
 export default function () {
   let id = faker.random.number({ min: 1, max: 1000 });
-  http.get(`http://localhost:3000/header/${id}`);
+  http.get(`http://localhost:3000/api/header/${id}`);
 }
